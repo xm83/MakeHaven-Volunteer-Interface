@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block main %}
+    <form action="/signup" method="post">
+        <center>
+            <ul id="taskcard">
+                <li>
+                    <hr class="my-4">
+                    <h2>TASK: {{ task_info["available_task"] }}</h2>
+                    <h3>Description: {{ task_info["task_description"] }}</h3>
+                    <h4>TIME: {{ task_info["minutes"] }} minutes</h4>
+                    <h4>Start Date: {{ task_info["start_date"] }}</h4>
+                    <h4>Recurs every {{ task_info["recurrence_cycle"] }} day(s)</h4>
+                    <hr>
+                    <button id ="signup" class="buttonBasic" type="submit">Sign Up</button>
+                </li>
+            </ul>
+        </center>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+<img src="static/backgrounds/make-haven-logo.png" alt="MakeHaven"/>
+
+
+
+{% extends "layout.html" %}
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <!-- Left side: Photo -->
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <div class="sidebar-nav">
+                    <img src="https://keep-calm.net/images/keep-calm-and-volunteer-600-800.jpg" alt="Keep Calm">
+                </div>
+                <!--/.well -->
+            </div>
+
+            <!-- Right side: Upcoming Task -->
+            <div class="col-xs-12 col-sm-9">
+                <br>
+                <div class="jumbotron">
+                    <a href="#" class="visible-xs" data-toggle="offcanvas"><i class="fa fa-lg fa-reorder"></i></a>
+                        <h2>Upcoming Task</h2>
+                        <ul id="taskcard">
+                            {% for row in tasks %}
+                                    <li>
+                                        <h2>TASK: {{ row["task"] }}</h2>
+                                        <h3>Description: {{ row["task_description"] }}</h3>
+                                        <h4>TIME: {{ row["minutes"] }} minutes</h4>
+                                        <h4>Start Date: {{ row["start_date"] }}</h4>
+                                        <h4>Recurs every {{ row["recurrence_cycle"] }} day(s)</h4>
+                                        <h4>Task Score: {{ row["task_score"] }} </h4>
+                                        <h5> Sign Up for <input type="submit" name = "task" value = {{ row['task'] }} class="button1"></h5>
+                                    </li>
+                                    <hr>
+
+                            {% endfor %}
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
