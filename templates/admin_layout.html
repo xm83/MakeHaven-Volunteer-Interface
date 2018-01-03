@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- documentation at http://getbootstrap.com/docs/4.0/, alternative themes at https://bootswatch.com/4-alpha/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <link href="/static/styles.css" rel="stylesheet"/>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+        <!-- AddEvent button script -->
+        <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+        <!-- AddEvent Settings -->
+        <script type="text/javascript">
+        window.addeventasync = function(){
+            addeventatc.settings({
+                appleical  : {show:true, text:"Apple Calendar"},
+                google     : {show:true, text:"Google <em>(online)</em>"},
+                outlook    : {show:true, text:"Outlook"},
+                outlookcom : {show:true, text:"Outlook.com <em>(online)</em>"},
+                yahoo      : {show:true, text:"Yahoo <em>(online)</em>"}
+            });
+        };
+        </script>
+    </head>
+
+        <title>MakeHaven</title>
+
+    </head>
+
+    <body>
+        <center>
+            <img src="https://cdn.evbuc.com/images/18571895/148573199919/1/logo.png" style="padding: 1px; border: thick inset grey;" alt="MakeHaven"/>
+        </center>
+        <nav id="topbar" class="navbar navbar-expand-md navbar-light bg-light border">
+            <a class="navbar-brand" href="/"><span class="red">MakeHaven</span></a>
+
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                {% if session.user_id %}
+                    <ul class="navbar-nav mr-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/user_info">Admin Info &nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/tasks">All Tasks&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/admin_checkin">Check In&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/add_tasks">Add Tasks&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/remove_tasks">Remove Tasks&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/admin_message_board">Message Board&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/rankings">Volunteer Rankings</a></li>
+
+                    </ul>
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
+
+        <main class="container-fluid">
+            {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-danger alert-dismissable border text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+            {% endif %}
+            <br>
+            <br>
+            {% block main %}{% endblock %}
+            <br>
+            <br>
+            <footer>
+                <hr class="my-4">
+                <p>
+                    <h6>© Vanessa Yan and Sally Ma 2017</h6>
+                </p>
+            </footer>
+        </main>
+
+    </body>
+
+</html>

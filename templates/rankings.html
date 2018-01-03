@@ -1,0 +1,35 @@
+{% if admin == 1 %}
+    {% extends "layout.html" %}
+{% endif %}
+{% if admin == 0 %}
+    {% extends "admin_layout.html" %}
+{% endif %}
+
+{% block title %}
+    Rankings
+{% endblock %}
+
+{% block main %}
+    <img src="static/backgrounds/volunteers.jpg" width="70%">
+    <br><br><br>
+    <h2>Congratulations to {{ users[0]["username"] }} for Placing No. 1! <img src="https://cdn0.iconfinder.com/data/icons/sport-balls/512/gold_medal.png" alt="You are a Star." width="40" height="40"></h2>
+
+    <div id="divtable2">
+        <table id="table1">
+            <thead>
+                <th>Ranking</th>
+                <th>Username</th>
+                <th>Credit</th>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user["username"]}}</td>
+                        <td>{{ user["credit"] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

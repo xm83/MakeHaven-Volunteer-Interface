@@ -1,0 +1,65 @@
+{% if admin == 1 %}
+    {% extends "layout.html" %}
+{% endif %}
+{% if admin == 0 %}
+    {% extends "admin_layout.html" %}
+{% endif %}
+
+{% block title %}
+    No Tasks Found
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <!-- Left Navigation Bar for filtering -->
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <div class="sidebar-nav">
+                    <div class="vertical-menu">
+                        <a href="#" class="nonactive1">Filter By</a>
+                        <a href="#" class="nonactive2">Time</a>
+                        <a href="/tasks5min" class="real">< 5 min</a>
+                        <a href="/tasks10min" class="real">5-10 min</a>
+                        <a href="/tasks20min" class="real">10-20min</a>
+                        <a href="/tasks30min" class="real">20-30min</a>
+                        <a href="/tasks40min" class="real">>30 min</a>
+                        <a href="#" class="nonactive2">Start Date</a>
+                        <a href="/taskstoday" class="real">Today</a>
+                        <a href="/tasks3days" class="real">Within 3 days</a>
+                        <a href="/tasks7days" class="real">Within a week</a>
+                        <a href="/tasksmonth" class="real">Within a month</a>
+                        <a href="/tasksmonths" class="real">Greater than a month</a>
+                        <a href="#" class="nonactive2">Task Score</a>
+                        <a href="/tasks1" class="real">1</a>
+                        <a href="/tasks2" class="real">2</a>
+                        <a href="/tasks3" class="real">3</a>
+                        <a href="/tasks4" class="real">4</a>
+                        <a href="/tasks5" class="real">5</a>
+                        <a href="/tasks6" class="real">Greater than 5</a>
+                        <a href="#" class="end"></a>
+                    </div>
+                </div>
+                <!--/.well -->
+            </div>
+
+            <!-- Right side: Task Wall -->
+            <div class="col-xs-12 col-sm-9">
+                <br>
+                <div class="jumbotron">
+                    <a href="#" class="visible-xs" data-toggle="offcanvas"><i class="fa fa-lg fa-reorder"></i></a>
+                    <hr>
+                    <img src="static/backgrounds/sadface.png" width="40%">
+                    <br><br><br>
+                    <h3>No Tasks Found With This Condition.</h3>
+                    <br>
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

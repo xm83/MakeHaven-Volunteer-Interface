@@ -1,0 +1,70 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+    User Info
+{% endblock %}
+
+{% block main %}
+
+<div id="user">
+    <div id="displayuserinfo">
+        <ul>
+            {% for info in user %}
+            <h2><p>{{ info['firstname'] }} {{ info['lastname']}} <font size=1><a href="/change_name">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp//&nbsp&nbsp&nbspChange Name</a></font></h2></p>
+            <li><b><p>Username: {{info['username']}} <font size="1"><a href="/change_username">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp//&nbsp&nbsp&nbspChange Username</a></font></p></li>
+            <li><p><a href="/change_password">Change Password</a></p></li>
+            <li><p>Credit: {{info['credit']}}</p></li>
+            {% endfor %}
+            <li><p> <a href="https://slack.com/signin"> Slack </a> </p></b></li>
+        </ul>
+    </div>
+</div>
+
+<hr>
+<div id="divtable">
+    <table id="table2">
+        <thead>
+            <th>Tasks</th>
+            <th>Minutes</th>
+            <th>Description</th>
+            <th>Score</th>
+            <th>Start Date</th>
+            <th>Sign up Date</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for row in tasks %}
+                <tr>
+                    <td>{{ row["task"] }}</td>
+                    <td>{{ row["minutes"] }} minutes</td>
+                    <td>{{ row["task_description" ]}}</td>
+                    <td>{{ row["task_score" ]}}</td>
+                    <td>{{ row["start_date" ]}}</td>
+                    <td>{{ row["sign_up_date" ]}}</td>
+
+                    <!-- Button code -->
+                    <td>
+                        <div title="Add to Calendar" class="addeventatc">
+                            Add to Calendar
+                            <span class="start">{{row["task"]}}</span>
+                            <span class="start">{{row["start_date"] }}</span>
+                            <span class="all_day_event">true</span>
+                            <span class="title">{{ row["task"] }} </span>
+                            <span class="description"> {{ row["task_description"]}}</span>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+

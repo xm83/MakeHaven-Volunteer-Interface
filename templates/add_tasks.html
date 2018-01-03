@@ -1,0 +1,30 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+    Add Tasks
+{% endblock %}
+
+
+{% block main %}
+    <h1><i>Add A New Task:</i></h1>
+        <hr>
+            <div id="user">
+                <div id="displayuserinfo">
+                    <ul>
+                    <form action="/add_tasks" method="post">
+                        <li>
+                            <div class="form-group"><h2> New Task: <input autocomplete=off autofocus id="add1" type="text" name = "task" placeholder = "Title"> </h2></div>
+                            <div class="form-group"><h3> Task Description:<br> <input autocomplete=off id="add4" type="text" name = "task_description"></h3></div>
+                            <div class="form-group"><h4> Number of Minutes the Task Takes:&nbsp;<input autocomplete=off id="add2" type="number" min="0" name = "minutes"> </h4></div>
+                            <div class="form-group"><h4> Task Score:&nbsp; <input autocomplete=off id="add2" type="number" min="0"  name = "task_score"> </h4></div>
+                            <div class="form-group"><h4> Recurs Every &nbsp; <input autocomplete=off id="add2" type="number" min="0" name = "recurrence_cycle">&nbsp;&nbsp; Day(s)</h4></div>
+                            <div class="form-group"><h4> Start Date: &nbsp;<input autocomplete=off id="add3" type="date" name = "start_date"></h4> </div>
+                        </li>
+                        <center><div class="form-group"> <button class="buttonBasic" type="submit">Add Task</button> </div></center>
+                    </form>
+                    </ul>
+                </div>
+
+            </div>
+
+{% endblock %}
