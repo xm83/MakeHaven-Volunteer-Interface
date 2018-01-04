@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- documentation at http://getbootstrap.com/docs/4.0/, alternative themes at https://bootswatch.com/4-alpha/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <link href="/static/styles.css" rel="stylesheet"/>
+
+        <script src="/static/scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    </head>
+
+        <title>MakeHaven: Home Page</title>
+
+    </head>
+
+
+    <body>
+        <!-- Top Navigation Bar -->
+        <nav id="topbar" class="navbar navbar-expand-md navbar-light bg-light border">
+            <a class="navbar-brand" href="/"><span class="red">MakeHaven</span></a>
+
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                {% if session.user_id %}
+                    <ul class="navbar-nav mr-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/user_info">Admin Info &nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/tasks">All Tasks&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/checkin">Check In&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/add_tasks">Add Tasks&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/remove_tasks">Remove Tasks&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/admin_message_board">Message Board&nbsp;&nbsp;&nbsp;|</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/rankings">Volunteer Rankings</a></li>
+
+                    </ul>
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
+
+        <!-- Carousel of slides with captions-->
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              </ol>
+              <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                  <div id="darkbg1"></div>
+                  <div class="carousel-caption d-none d-md-block">
+                    <h2><font size ="7">Welcome, {{ firstname }}. </font></h2>
+                    <br><br>
+                    <div id="upcoming">
+                        <h2>There are {{ count }} outstanding messages to be reviewed.</h2>
+                        <h4><font size="3">Go to Message Board to review messages.</font></h4>
+                        <hr class="index">
+                    </div>
+                    <h3>"Immortality is to live your life doing good things, and leaving your mark behind." </h3>
+                  </div>
+                </div>
+
+    </body>
+
+
+</html>
