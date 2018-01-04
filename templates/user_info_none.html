@@ -1,10 +1,9 @@
-{% if admin == 1 %}
+{% if admin == false %}
     {% extends "layout.html" %}
 {% endif %}
-{% if admin == 0 %}
+{% if admin == true %}
     {% extends "admin_layout.html" %}
 {% endif %}
-
 {% block title %}
     User Info
 {% endblock %}
