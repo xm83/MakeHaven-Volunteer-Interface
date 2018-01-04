@@ -139,7 +139,7 @@ def admin_message_board():
         # delete messages
         elif request.form.get("delete"):
             # update entry to reviewed
-            db.execute("UPDATE forum SET reviewed = 0 WHERE comment_id = :c", c=request.form.get("delete"))
+            db.execute("UPDATE forum SET reviewed = true WHERE comment_id = :c", c=request.form.get("delete"))
             flash("user comment has been deleted")
             return redirect("/admin_message_board")
 
