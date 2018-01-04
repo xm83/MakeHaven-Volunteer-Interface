@@ -1,4 +1,4 @@
 cs50
 Gunicorn
-Flask
-Flask - Session
+Flask==0.12.2
+Flask-Session==0.3.1
