@@ -1,4 +1,9 @@
-{% extends "layout.html" %}
+{% if admin == false %}
+    {% extends "layout.html" %}
+{% endif %}
+{% if admin == true %}
+    {% extends "admin_layout.html" %}
+{% endif %}
 
 {% block title %}
     Check in
