@@ -41,9 +41,8 @@ def index():
     admin = db.execute("SELECT admin, firstname FROM users WHERE id = :u", u=session["user_id"])
 
     # admin index page
-    if admin[0]["admin"] == 0:
-        count = db.execute("SELECT count(comment) FROM forum WHERE reviewed = false")
-        return render_template("admin_index.html", count=count[0]['count(comment)'], firstname=admin[0]["firstname"])
+    if admin[0]["admin"] == true:
+        return render_template("admin_index.html", firstname=admin[0]["firstname"])
 
     # volunteer index page
     else:
