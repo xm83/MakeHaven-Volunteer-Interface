@@ -42,7 +42,7 @@ def index():
 
     # admin index page
     if admin[0]["admin"] == 0:
-        count = db.execute("SELECT count(comment) FROM forum WHERE reviewed = 1")
+        count = db.execute("SELECT count(comment) FROM forum WHERE reviewed = false")
         return render_template("admin_index.html", count=count[0]['count(comment)'], firstname=admin[0]["firstname"])
 
     # volunteer index page
@@ -53,7 +53,7 @@ def index():
         info = db.execute("SELECT * FROM users WHERE id = :u", u=session["user_id"])
 
         # Select a random unclaimed task from tasks table
-        suggestion = db.execute("SELECT * FROM tasks WHERE claimed = 1 ORDER BY RANDOM() LIMIT 1")
+        suggestion = db.execute("SELECT * FROM tasks WHERE claimed = false ORDER BY RANDOM() LIMIT 1")
 
         # if no signed up tasks
         if not tasks:
@@ -85,10 +85,10 @@ def signup():
     """lets user sign up for the task, add task for user"""
     # Get whatever task the user clicked on task page
     if request.method == "POST":
-        # change chore in tasks to claimed(0) and update matching user_id, sign_up date, username for said chore
+        # change chore in tasks to claimed as true and update matching user_id, sign_up date, username for said chore
         task = request.form.get("task")
         username = db.execute("SELECT username FROM users WHERE id = :i", i=session["user_id"])
-        db.execute("UPDATE tasks SET claimed = 0, user_id = :i, sign_up_date = :time, username = :u WHERE task = :t",
+        db.execute("UPDATE tasks SET claimed = true, user_id = :i, sign_up_date = :time, username = :u WHERE task = :t",
                    t=task, i=session["user_id"], time=datetime.now(), u=username[0]["username"])
 
         flash("Signed up!")
@@ -103,7 +103,7 @@ def user_info():
         "SELECT * FROM users WHERE id = :u", u=session["user_id"])
     # Select the tasks that user signed up but hasn't checked in
     selected_tasks = db.execute(
-        "SELECT * FROM tasks WHERE user_id = :u AND active = 0", u=session["user_id"])
+        "SELECT * FROM tasks WHERE user_id = :u AND active = true", u=session["user_id"])
 
     if not selected_tasks:
         return redirect("/user_info_none")
@@ -122,9 +122,9 @@ def user_info_none():
 @login_required
 def admin_message_board():
     """Show admin display of message board"""
-    forum = db.execute("SELECT * FROM forum WHERE admin=1 AND approved=0 ORDER BY post_time DESC")
-    admin_messages = db.execute("SELECT * FROM forum WHERE admin=0 ORDER BY post_time DESC")
-    outstanding = db.execute("SELECT * FROM forum WHERE reviewed=1 ORDER BY post_time")
+    forum = db.execute("SELECT * FROM forum WHERE admin= false AND approved = true ORDER BY post_time DESC")
+    admin_messages = db.execute("SELECT * FROM forum WHERE admin= true ORDER BY post_time DESC")
+    outstanding = db.execute("SELECT * FROM forum WHERE reviewed=false ORDER BY post_time")
 
     if request.method == "GET":
         return render_template("admin_message_board.html", forum=forum, admin_messages=admin_messages, outstanding=outstanding, notifications=admin_messages)
@@ -132,7 +132,7 @@ def admin_message_board():
         # approve messages
         if request.form.get("approve"):
             # update entry to reviewed and approved in forum table
-            db.execute("UPDATE forum SET reviewed = 0, approved = 0 WHERE comment_id = :c", c=request.form.get("approve"))
+            db.execute("UPDATE forum SET reviewed = true, approved = true WHERE comment_id = :c", c=request.form.get("approve"))
             flash("approved message")
             return redirect("/admin_message_board")
 
@@ -150,7 +150,7 @@ def admin_message_board():
                 "SELECT username, admin, firstname, lastname FROM users WHERE id = :i", i=session["user_id"])
             # add new admin message to "forum" table
             db.execute("INSERT INTO forum(user_id, comment, admin, username, firstname, lastname, approved, reviewed) VALUES (:s, :c, :a, :u, :f, :l, :r, :p)", s=session["user_id"], c=request.form.get(
-                "message"), a=info[0]["admin"], u=info[0]["username"], f=info[0]["firstname"], l=info[0]["lastname"], r=0, p=0)
+                "message"), a=info[0]["admin"], u=info[0]["username"], f=info[0]["firstname"], l=info[0]["lastname"], r= true, p= true)
             flash("Added an admin notification")
             return redirect("/admin_message_board")
 
@@ -173,8 +173,8 @@ def admin_message_board():
 @login_required
 def message_board():
     """Show message board"""
-    forum = db.execute("SELECT * FROM forum WHERE admin=1 AND approved=0 ORDER BY post_time DESC")
-    admin_messages = db.execute("SELECT * FROM forum WHERE admin=0 ORDER BY post_time DESC")
+    forum = db.execute("SELECT * FROM forum WHERE admin=false AND approved=true ORDER BY post_time DESC")
+    admin_messages = db.execute("SELECT * FROM forum WHERE admin=true ORDER BY post_time DESC")
 
 
     if request.method == "GET":
