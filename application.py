@@ -41,7 +41,7 @@ def index():
     admin = db.execute("SELECT admin, firstname FROM users WHERE id = :u", u=session["user_id"])
 
     # admin index page
-    if admin[0]["admin"] == true:
+    if admin[0]["admin"] == True:
         return render_template("admin_index.html", firstname=admin[0]["firstname"])
 
     # volunteer index page
@@ -52,7 +52,7 @@ def index():
         info = db.execute("SELECT * FROM users WHERE id = :u", u=session["user_id"])
 
         # Select a random unclaimed task from tasks table
-        suggestion = db.execute("SELECT * FROM tasks WHERE claimed = false ORDER BY RANDOM() LIMIT 1")
+        suggestion = db.execute("SELECT * FROM tasks WHERE claimed = False ORDER BY RANDOM() LIMIT 1")
 
         # if no signed up tasks
         if not tasks:
@@ -84,10 +84,10 @@ def signup():
     """lets user sign up for the task, add task for user"""
     # Get whatever task the user clicked on task page
     if request.method == "POST":
-        # change chore in tasks to claimed as true and update matching user_id, sign_up date, username for said chore
+        # change chore in tasks to claimed as True and update matching user_id, sign_up date, username for said chore
         task = request.form.get("task")
         username = db.execute("SELECT username FROM users WHERE id = :i", i=session["user_id"])
-        db.execute("UPDATE tasks SET claimed = true, user_id = :i, sign_up_date = :time, username = :u WHERE task = :t",
+        db.execute("UPDATE tasks SET claimed = True, user_id = :i, sign_up_date = :time, username = :u WHERE task = :t",
                    t=task, i=session["user_id"], time=datetime.now(), u=username[0]["username"])
 
         flash("Signed up!")
@@ -102,7 +102,7 @@ def user_info():
         "SELECT * FROM users WHERE id = :u", u=session["user_id"])
     # Select the tasks that user signed up but hasn't checked in
     selected_tasks = db.execute(
-        "SELECT * FROM tasks WHERE user_id = :u AND active = true", u=session["user_id"])
+        "SELECT * FROM tasks WHERE user_id = :u AND active = True", u=session["user_id"])
 
     if not selected_tasks:
         return redirect("/user_info_none")
