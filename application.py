@@ -121,9 +121,9 @@ def user_info_none():
 @login_required
 def admin_message_board():
     """Show admin display of message board"""
-    forum = db.execute("SELECT * FROM forum WHERE admin= false AND approved = true ORDER BY post_time DESC")
-    admin_messages = db.execute("SELECT * FROM forum WHERE admin= true ORDER BY post_time DESC")
-    outstanding = db.execute("SELECT * FROM forum WHERE reviewed=false ORDER BY post_time")
+    forum = db.execute("SELECT * FROM forum WHERE admin= False AND approved = True ORDER BY post_time DESC")
+    admin_messages = db.execute("SELECT * FROM forum WHERE admin= True ORDER BY post_time DESC")
+    outstanding = db.execute("SELECT * FROM forum WHERE reviewed=False ORDER BY post_time")
 
     if request.method == "GET":
         return render_template("admin_message_board.html", forum=forum, admin_messages=admin_messages, outstanding=outstanding, notifications=admin_messages)
@@ -131,14 +131,14 @@ def admin_message_board():
         # approve messages
         if request.form.get("approve"):
             # update entry to reviewed and approved in forum table
-            db.execute("UPDATE forum SET reviewed = true, approved = true WHERE comment_id = :c", c=request.form.get("approve"))
+            db.execute("UPDATE forum SET reviewed = True, approved = True WHERE comment_id = :c", c=request.form.get("approve"))
             flash("approved message")
             return redirect("/admin_message_board")
 
         # delete messages
         elif request.form.get("delete"):
             # update entry to reviewed
-            db.execute("UPDATE forum SET reviewed = true WHERE comment_id = :c", c=request.form.get("delete"))
+            db.execute("UPDATE forum SET reviewed = True WHERE comment_id = :c", c=request.form.get("delete"))
             flash("user comment has been deleted")
             return redirect("/admin_message_board")
 
@@ -149,7 +149,7 @@ def admin_message_board():
                 "SELECT username, admin, firstname, lastname FROM users WHERE id = :i", i=session["user_id"])
             # add new admin message to "forum" table
             db.execute("INSERT INTO forum(user_id, comment, admin, username, firstname, lastname, approved, reviewed) VALUES (:s, :c, :a, :u, :f, :l, :r, :p)", s=session["user_id"], c=request.form.get(
-                "message"), a=info[0]["admin"], u=info[0]["username"], f=info[0]["firstname"], l=info[0]["lastname"], r= true, p= true)
+                "message"), a=info[0]["admin"], u=info[0]["username"], f=info[0]["firstname"], l=info[0]["lastname"], r= True, p= True)
             flash("Added an admin notification")
             return redirect("/admin_message_board")
 
@@ -172,8 +172,8 @@ def admin_message_board():
 @login_required
 def message_board():
     """Show message board"""
-    forum = db.execute("SELECT * FROM forum WHERE admin=false AND approved=true ORDER BY post_time DESC")
-    admin_messages = db.execute("SELECT * FROM forum WHERE admin=true ORDER BY post_time DESC")
+    forum = db.execute("SELECT * FROM forum WHERE admin=False AND approved=True ORDER BY post_time DESC")
+    admin_messages = db.execute("SELECT * FROM forum WHERE admin=True ORDER BY post_time DESC")
 
 
     if request.method == "GET":
