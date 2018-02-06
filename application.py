@@ -30,7 +30,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-# Configure CS50 Library to use Postgre database
+# Configure CS50 Library to use SQL database
 db = SQL("sqlite:///project.db")
 
 
