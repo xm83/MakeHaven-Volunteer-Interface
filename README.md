@@ -1,11 +1,11 @@
 # :wrench: MakeHaven Volunteer Interface :high_brightness:
-Final Project for CS50" 
+Final Project for CS50
 
 A volunteer community interface for a local service organization called MakeHaven. We aim to enhance motivation, communication, and organization for volunteer work through various functionalities. The project is stored in CS50 IDE and is compiled through Flask.
 
 (Note: the program requires the module "dateutil", thus any CS50 IDE server needs to download python-dateutil package by executing the following two commands: "sudo apt-get install python-pip"; "sudo pip install python-dateutil".)
 
-## Usage for volunteers
+## Usage for volunteers :page_with_curl:
 
 To browse the website, a volunteer would need to register an account on the website. The user's account information would be stored in the table "users" in our database "project.db."
 
@@ -20,7 +20,7 @@ To view one's credit score compared to other volunteers', users can click on the
 
 Finally, users may access a discussion forum through the "Message Board" tab on the top-left navigation bar. Users may view any notifications posted by administrative staff. Users may also post messages in the forum and adjust the size of the text box if necessary. After submission, users' comments need to be approved by administrative staff and their "approved" status changed to 0 in the "forum" table. Once the status is changed, the comment will appear on the message board.
 
-## Usage for admins
+## Usage for admins :page_with_curl:
 
 Admins have the added functionalities of: 1) Add Tasks; 2) Remove Tasks; 3) Approve or delete user comments; 4) Post Admin notification (at Message Board).
 
