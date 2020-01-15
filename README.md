@@ -1,6 +1,8 @@
 # :wrench: MakeHaven Volunteer Interface :high_brightness:
 Final Project for CS50
 
+Check out our demo video :clapper: https://youtu.be/ZbWkigHhxFE :clapper:!
+
 A volunteer community interface for a local service organization called MakeHaven. We aim to enhance motivation, communication, and organization for volunteer work through various functionalities. The project is stored in CS50 IDE and is compiled through Flask.
 
 (Note: the program requires the module "dateutil", thus any CS50 IDE server needs to download python-dateutil package by executing the following two commands: "sudo apt-get install python-pip"; "sudo pip install python-dateutil".)
